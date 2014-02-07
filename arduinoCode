@@ -1,0 +1,32 @@
+
+void setup() {                
+  Serial.begin(9600);
+  for(int i = 10; i <= 13; i++) 
+    pinMode(i,OUTPUT);
+}
+
+void desligaTudo() {
+  for(int i = 10; i <= 13; i++) 
+    digitalWrite(i,LOW);
+}
+
+void liga(int i) { 
+  if (i == 1 || i == 5 || i == 9) 
+    digitalWrite(10,HIGH);
+  if (i == 2 || i == 6 || i == 10)
+    digitalWrite(11,HIGH);
+  if (i == 4 || i == 5 || i == 6) 
+    digitalWrite(12,HIGH);
+  if (i == 8 || i == 9 || i == 10)
+    digitalWrite(13,HIGH);
+}
+
+void loop() {
+  while (Serial.available()) {
+    char comando = (char)Serial.read();
+    desligaTudo();
+    liga(comando-48);
+  }
+}
+
+
